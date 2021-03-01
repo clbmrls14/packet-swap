@@ -1,5 +1,5 @@
 
-new_game_board = {
+NEW_GAME_BOARD = {
     (0,0):' ', (0,1):'O', (0,2):'O', (0,3):'O', (0,4):' ',
     (1,0):'X', (1,1):' ', (1,2):' ', (1,3):' ', (1,4):' ',
     (2,0):'X', (2,1):' ', (2,2):' ', (2,3):' ', (2,4):' ',
@@ -8,9 +8,15 @@ new_game_board = {
 }
 
 class game_state:
-    player_turn = 'O'
-    num_turns = 0
-    game_board = new_game_board
+    def __init__(self, turn: str, turn_count: int, board: dict):
+        self.player_turn = turn
+        self.num_turns = turn_count
+        self.game_board = board
+    
+    def reset(self):
+        self.player_turn = 'O'
+        self.num_turns = 0
+        self.game_board = NEW_GAME_BOARD
 
     def advance_packet(self, packet: tuple):
         if self.player_turn == 'O':
@@ -36,11 +42,20 @@ class game_state:
 
     def check_win_condition(self):
         x_win_condition = [(1,4), (2,4), (3,4)]
-        o_win_condition [(4,1), (4,2), (4,3)]
+        o_win_condition = [(4,1), (4,2), (4,3)]
         if self.player_turn == 'X':
             if all(self.game_board[i] == self.player_turn for i in x_win_condition):
-                return true
+                return True
         if self.player_turn == 'O':
             if all(self.game_board == self.player_turn for i in o_win_condition):
-                return turn
-        return false
+                return True
+        return False
+
+    def print_board(board: dict):
+        printer = ""
+        for i in range(0,5):
+            for j in range(0,5):
+                printer = printer + " " + board[i,j]
+            printer = printer + "\n"
+        print(printer)
+        return printer
