@@ -8,7 +8,7 @@ NEW_GAME_BOARD = {
 }
 
 class game_state:
-    def __init__(self, turn: str, turn_count: int, board: dict):
+    def __init__(self, turn: str = 'O', turn_count: int = 0, board: dict = NEW_GAME_BOARD):
         self.player_turn = turn
         self.num_turns = turn_count
         self.game_board = board
